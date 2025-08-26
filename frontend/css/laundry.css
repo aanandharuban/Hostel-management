@@ -1,0 +1,124 @@
+/* 🔷 Overall Page Styling */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #dff6ff, #b0e0e6);
+  margin: 0;
+  padding: 20px;
+  color: #222;
+}
+
+/* 📦 Card Layout */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  background: #ffffffdd;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px #00000020;
+  width: 100%;
+  max-width: 480px;
+  flex: 1 1 45%;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+h2, h3 {
+  text-align: center;
+  color: #1e3f66;
+}
+
+/* 🧼 Form Inputs */
+form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+input[type="datetime-local"] {
+  padding-right: 2px;
+}
+
+/* 🟩 Button Style */
+.btn {
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: linear-gradient(to right, #0072ff, #00c6ff);
+}
+
+.hidden {
+  display: none;
+}
+
+/* 🧭 Machine Status */
+#machines li {
+  list-style: none;
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+.available {
+  color: green;
+  font-weight: bold;
+}
+.inuse {
+  color: #d35400;
+  font-weight: bold;
+}
+.maintenance {
+  color: red;
+  font-weight: bold;
+}
+
+/* 🧾 History Items */
+.history-item {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.history-item span.completed {
+  color: green;
+}
+.history-item span.inuse {
+  color: orange;
+}
+
+/* 📊 Stats List */
+#stats ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+#stats ul li {
+  margin-bottom: 4px;
+}

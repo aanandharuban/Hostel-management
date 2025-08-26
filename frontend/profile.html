@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Profile | Hostel Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/overview.css" />
+  <style>
+    body {
+      background: #ffffff;
+    }
+    .profile-card {
+      background: #fefefe;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+    .profile-card h2 {
+      margin-bottom: 10px;
+      text-align: center;
+      color: #00796b;
+    }
+    .profile-card label {
+      font-weight: 600;
+      display: block;
+      margin-top: 15px;
+      color: #333;
+    }
+    .profile-card input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 5px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .profile-card input::placeholder {
+      color: #aaa;
+    }
+    .profile-card button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      border: none;
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .profile-card button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar" style="background:#2c3e50;">
+      <h2>🏠 Hostel</h2>
+      <nav>
+        <a href="overview.html">Overview</a>
+        <a href="complaint.html">Complaints</a>
+        <a href="outing.html">Outing</a>
+        <a href="laundry.html">Laundry</a>
+        <a href="emergency.html">Emergency</a>
+        <a href="profile.html" class="active">Profile</a>
+        <a href="index.html" onclick="logout()">Logout</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="profile-card">
+        <h2>👤 My Profile</h2>
+        <form id="profileForm">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Enter full name" disabled />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter email address" disabled />
+
+          <label for="phone">Phone Number</label>
+          <input type="text" id="phone" placeholder="Enter phone number" disabled />
+
+          <label for="room">Room Details</label>
+          <input type="text" id="room" placeholder="Room No., Block" disabled />
+
+          <label for="emergency1">Emergency Contact #1</label>
+          <input type="text" id="emergency1" placeholder="Parent: Name & Phone" disabled />
+
+          <label for="emergency2">Emergency Contact #2</label>
+          <input type="text" id="emergency2" placeholder="Guardian: Name & Phone" disabled />
+
+          <label for="emergency3">Emergency Contact #3</label>
+          <input type="text" id="emergency3" placeholder="Any other contact" disabled />
+
+          <button type="button" id="editBtn">Edit Profile</button>
+          <button type="submit" id="saveBtn" style="display:none;">Save Changes</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const token = localStorage.getItem("token");
+    const form = document.getElementById("profileForm");
+    const inputs = form.querySelectorAll("input");
+    const editBtn = document.getElementById("editBtn");
+    const saveBtn = document.getElementById("saveBtn");
+
+    async function loadProfile() {
+      const res = await fetch("http://localhost:5000/api/student/profile", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if (data.success) {
+        const s = data.student;
+        document.getElementById("name").value = s.name;
+        document.getElementById("email").value = s.email;
+        document.getElementById("phone").value = s.phone || "";
+        document.getElementById("room").value = s.room + ", Block " + s.block;
+        document.getElementById("emergency1").value = s.emergency1 || "";
+        document.getElementById("emergency2").value = s.emergency2 || "";
+        document.getElementById("emergency3").value = s.emergency3 || "";
+      }
+    }
+
+    editBtn.addEventListener("click", () => {
+      inputs.forEach(i => i.disabled = false);
+      editBtn.style.display = "none";
+      saveBtn.style.display = "inline-block";
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const updated = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        emergency1: document.getElementById("emergency1").value,
+        emergency2: document.getElementById("emergency2").value,
+        emergency3: document.getElementById("emergency3").value
+      };
+
+      const res = await fetch("http://localhost:5000/api/student/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(updated)
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert("✅ Profile updated!");
+        inputs.forEach(i => i.disabled = true);
+        editBtn.style.display = "inline-block";
+        saveBtn.style.display = "none";
+      } else {
+        alert("❌ Failed to update profile");
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem("token");
+    }
+
+    loadProfile();
+  </script>
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Emergency Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/overview.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f8faff;
+    }
+
+    .dashboard {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      padding: 10px;
+      margin: 10px 0;
+      color: #ccc;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .sidebar nav a.active,
+    .sidebar nav a:hover {
+      background: #1abc9c;
+      color: white;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: darkblue;
+    }
+
+    .section {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    select, textarea, input {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: red;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .tabs button {
+      background: #e3e3e3;
+      margin-right: 10px;
+      color: black;
+    }
+
+    .tabs button.active {
+      background: #1abc9c;
+      color: white;
+    }
+
+    .contacts {
+      display: none;
+    }
+
+    .contacts.active {
+      display: block;
+    }
+
+    .contact-box {
+      background: #f0f9ff;
+      border-left: 4px solid #1abc9c;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .contact-info {
+      line-height: 1.5;
+      color: black;
+    }
+
+    .contact-actions button {
+      margin-left: 10px;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .call-btn {
+      background: #16a085;
+    }
+
+    .edit-btn {
+      background: #007bff;
+    }
+
+    .delete-btn {
+      background: #e74c3c;
+    }
+
+    #addContactBtn {
+      margin-top: 20px;
+      background: #4caf50;
+      color: white;
+      font-weight: bold;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Modal styles */
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: left;
+    }
+
+    .modal-content input {
+      width: 100%;
+      margin: 8px 0;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-content button {
+      margin-top: 10px;
+      margin-right: 10px;
+      padding: 8px 12px;
+    }
+
+    .modal-content .cancel {
+      background: #777;
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+    }
+    /* Force black font color for main content */
+.main-content, 
+.main-content * {
+  color: black !important;
+}
+
+/* Also enforce inside modal and input elements */
+.modal *, 
+.contact-box *, 
+.section *, 
+.contact-list * {
+  color: black !important;
+}
+
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>🏠 Hostel</h2>
+      <nav>
+        <a href="overview.html">Overview</a>
+        <a href="complaint.html">Complaints</a>
+        <a href="outing.html">Outing</a>
+        <a href="laundry.html">Laundry</a>
+        <a href="emergency.html" class="active">Emergency</a>
+        <a href="profile.html">Profile</a>
+        <a href="index.html">Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Emergency Management</h1>
+
+      <!-- 🚨 Emergency Alert -->
+      <div class="section">
+        <h2>🚨 Emergency Alert</h2>
+        <label for="emergencyType">Emergency Type</label>
+        <select id="emergencyType">
+          <option value="">-- Select Emergency Type --</option>
+          <option value="Medical">Medical</option>
+          <option value="Security">Security</option>
+          <option value="Fire">Fire</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="description">Description (optional)</label>
+        <textarea id="description" placeholder="Enter any additional info..."></textarea>
+
+        <button onclick="sendEmergency()">🛑 Send Emergency Alert</button>
+      </div>
+
+      <!-- 📇 Contact Tabs -->
+      <div class="tabs">
+        <button id="hostelTab" class="active" onclick="switchTab('hostel')">Hostel Contacts</button>
+        <button id="personalTab" onclick="switchTab('personal')">Personal Contacts</button>
+      </div>
+
+      <!-- Hostel Contacts -->
+      <div id="hostelContacts" class="contacts active section">
+        <div class="contact-box">
+          <div class="contact-info">
+            <strong>Hostel Warden</strong><br>
+            📞 +91 98765 43210<br>
+            ⏰ Available: 24x7
+          </div>
+          <div class="contact-actions">
+            <button class="call-btn" onclick="callNow('+919876543210')">📞 Call</button>
+          </div>
+        </div>
+
+        <div class="contact-box">
+          <div class="contact-info">
+            <strong>Campus Security</strong><br>
+            📞 +91 91234 56789<br>
+            ⏰ Available: 24x7
+          </div>
+          <div class="contact-actions">
+            <button class="call-btn" onclick="callNow('+919123456789')">📞 Call</button>
+          </div>
+        </div>
+
+        <div class="contact-box">
+          <div class="contact-info">
+            <strong>Medical Center</strong><br>
+            📞 +91 90123 45678<br>
+            ⏰ Available: 8am - 8pm
+          </div>
+          <div class="contact-actions">
+            <button class="call-btn" onclick="callNow('+919012345678')">📞 Call</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Contacts -->
+      <div id="personalContacts" class="contacts section">
+        <div class="contact-list" id="personalList"></div>
+        <button id="addContactBtn">➕ Add Contact</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div id="contactModal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="modalTitle">Add Personal Contact</h3>
+      <label>Name</label>
+      <input type="text" id="contactName" required />
+
+      <label>Phone Number</label>
+      <input type="tel" id="contactPhone" required />
+
+      <label>Relation</label>
+      <input type="text" id="contactRelation" required />
+
+      <button onclick="saveContact()">💾 Save</button>
+      <button class="cancel" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script>
+    function callNow(phone) {
+      window.location.href = `tel:${phone}`;
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove("active"));
+      document.querySelectorAll('.contacts').forEach(box => box.classList.remove("active"));
+
+      document.getElementById(tab + "Tab").classList.add("active");
+      document.getElementById(tab + "Contacts").classList.add("active");
+    }
+
+    function sendEmergency() {
+  const type = document.getElementById("emergencyType").value;
+  const desc = document.getElementById("description").value;
+
+  if (!type && !desc) {
+    alert("Please enter at least a type or description.");
+    return;
+  }
+
+  fetch("http://localhost:5000/api/emergency", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    },
+    body: JSON.stringify({ type, desc })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert("✅ Emergency alert sent!");
+        document.getElementById("emergencyType").value = "";
+        document.getElementById("description").value = "";
+      } else {
+        alert("❌ Failed to send alert: " + data.message);
+      }
+    })
+    .catch(err => {
+      console.error("Emergency fetch error:", err);
+      alert("❌ Network error");
+    });
+}
+
+
+    let editingContactIndex = null;
+    let personalContacts = JSON.parse(localStorage.getItem("personalContacts") || "[]");
+
+    function loadContacts() {
+      const list = document.getElementById("personalList");
+      list.innerHTML = "";
+
+      personalContacts.forEach((c, i) => {
+        const div = document.createElement("div");
+        div.className = "contact-box";
+        div.innerHTML = `
+        <div class="contact-info">
+          <strong>${c.name}</strong><br/>
+          📞 ${c.phone}<br/>
+          Relation: ${c.relation}
+        </div>
+        <div class="contact-actions">
+          <button class="call-btn" onclick="callNow('${c.phone}')">📞 Call</button>
+          <button class="edit-btn" onclick="editContact(${i})">✏️</button>
+          <button class="delete-btn" onclick="deleteContact(${i})">❌</button>
+        </div>
+      `;
+        list.appendChild(div);
+      });
+    }
+
+    function openModal() {
+      document.getElementById("contactModal").classList.remove("hidden");
+      document.getElementById("modalTitle").innerText = "Add Personal Contact";
+      document.getElementById("contactName").value = "";
+      document.getElementById("contactPhone").value = "";
+      document.getElementById("contactRelation").value = "";
+      editingContactIndex = null;
+    }
+
+    function closeModal() {
+      document.getElementById("contactModal").classList.add("hidden");
+    }
+
+    function saveContact() {
+      const name = document.getElementById("contactName").value;
+      const phone = document.getElementById("contactPhone").value;
+      const relation = document.getElementById("contactRelation").value;
+
+      if (!name || !phone || !relation) return alert("All fields are required");
+
+      const newContact = { name, phone, relation };
+
+      if (editingContactIndex === null) {
+        personalContacts.push(newContact);
+      } else {
+        personalContacts[editingContactIndex] = newContact;
+      }
+
+      localStorage.setItem("personalContacts", JSON.stringify(personalContacts));
+      loadContacts();
+      closeModal();
+    }
+
+    function deleteContact(i) {
+      if (confirm("Are you sure to delete this contact?")) {
+        personalContacts.splice(i, 1);
+        localStorage.setItem("personalContacts", JSON.stringify(personalContacts));
+        loadContacts();
+      }
+    }
+
+    function editContact(i) {
+      const c = personalContacts[i];
+      editingContactIndex = i;
+      document.getElementById("modalTitle").innerText = "Edit Contact";
+      document.getElementById("contactName").value = c.name;
+      document.getElementById("contactPhone").value = c.phone;
+      document.getElementById("contactRelation").value = c.relation;
+      document.getElementById("contactModal").classList.remove("hidden");
+    }
+
+    document.getElementById("addContactBtn").addEventListener("click", openModal);
+    window.onload = loadContacts;
+  </script>
+</body>
+</html>

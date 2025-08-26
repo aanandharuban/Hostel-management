@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #0062E6, #33AEFF);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.profile-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  padding: 30px;
+}
+
+.header {
+  text-align: center;
+  color: #007bff;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.profile-details {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.info label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.info input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.btn-row {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}

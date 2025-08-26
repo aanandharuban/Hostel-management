@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Records</title>
+  <style>
+    body {
+      font-family: Poppins, sans-serif;
+      background: #f4f8fb;
+      padding: 20px;
+    }
+    h2{
+      text-align: center;
+        margin-bottom: 20px; /* Add some space below it */
+        color: #333; 
+    }
+
+
+
+    .student-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .student-table th, .student-table td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    .student-table th {
+      background: #007bff;
+      color: white;
+    }
+
+    .student-table tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    button {
+      padding: 6px 12px;
+      border: none;
+      background: #28a745;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button.delete {
+      background: #dc3545;
+    }
+
+    input {
+      width: 100%;
+      padding: 6px;
+      border: 1px solid #ddd;
+    }
+
+    .actions {
+      display: flex;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Student Records</h2>
+  <input type="text" id="searchInput" placeholder="Search by name or email" style="width: 30%; padding: 10px; margin-top: 10px; display: block; float: left; border: 1px solid #ddd;  box-sizing: border-box;  margin-bottom: 20px;">
+  <table class="student-table" id="studentTable">
+    <thead>
+       <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Room</th>
+        <th>Block</th>
+        <th>Department</th>
+        <th>Year</th>
+        <th>Phone</th>
+        <th>Remove</th>
+       </tr>
+    </thead>
+    <tbody id="studentTableBody"></tbody>
+
+  </table>
+
+  <script src="js/warden-students.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Laundry Management</title>
+  <link rel="stylesheet" href="css/laundry.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Laundry Management</h2>
+
+    <!-- 🔵 Active Session -->
+    <div class="card" id="activeSession">
+      <h3>Active Session</h3>
+      <div id="activeContent">Loading...</div>
+      <button id="markCompleteBtn" class="btn hidden">Mark Complete</button>
+    </div>
+
+    <!-- 🔵 Booking -->
+    <div class="card">
+      <h3>Schedule Laundry</h3>
+      <form id="laundryForm">
+        <label>Machine:
+          <select id="machine">
+            <option value="W-01">W-01</option>
+            <option value="W-02">W-02</option>
+            <option value="W-03">W-03</option>
+          </select>
+        </label>
+        <label>Laundry Type:
+          <select id="laundryType">
+            <option>Regular</option>
+            <option>Delicate</option>
+            <option>Heavy Duty</option>
+            <option>Quick Wash</option>
+          </select>
+        </label>
+        <label>Items:
+          <input type="number" id="itemCount" required />
+        </label>
+        <label>Start Time:
+          <input type="datetime-local" id="startTime" required />
+        </label>
+        <button type="submit" class="btn">Schedule Session</button>
+      </form>
+    </div>
+
+    <!-- 🔵 Machine Status -->
+    <div class="card" id="machineStatus">
+      <h3>Machine Status</h3>
+      <ul id="machines"></ul>
+    </div>
+
+    <!-- 🔵 History -->
+    <div class="card">
+      <h3>Laundry History</h3>
+      <div id="historyList">Loading...</div>
+    </div>
+
+    <!-- 🔵 Stats -->
+    <div class="card">
+      <h3>Usage Statistics</h3>
+      <div id="stats">Loading...</div>
+    </div>
+  </div>
+
+  <script src="js/laundry.js"></script>
+</body>
+</html>

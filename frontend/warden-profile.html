@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Warden Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #e1bee7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .profile-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 450px;
+    }
+    .profile-header {
+      background: linear-gradient(to right, #7b1fa2, #512da8);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 15px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+    input:disabled {
+      background-color: #f2f2f2;
+    }
+    .emergency-box {
+      margin-top: 20px;
+      padding: 10px;
+      background: #f9fbe7;
+      border: 1px dashed #cddc39;
+      border-radius: 8px;
+    }
+    .button-group {
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .edit-btn {
+      background-color: #ffca28;
+      color: #333;
+    }
+    .edit-btn:hover {
+      background-color: #fdd835;
+    }
+    .save-btn {
+      background-color: #4caf50;
+      color: white;
+      display: none;
+    }
+    .save-btn:hover {
+      background-color: #43a047;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-header">Warden Profile</div>
+    <form id="profileForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" disabled />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" disabled />
+
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" disabled />
+
+      <label for="block">Hostel Block</label>
+      <input type="text" id="block" disabled />
+
+      <div class="emergency-box">
+        <strong>Emergency Contacts:</strong>
+        <p>Warden Office: +91-9876543210</p>
+        <p>Security Desk: +91-9443322110</p>
+        <p>Medical Helpline: 102</p>
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="btn edit-btn" id="editBtn">Edit Profile</button>
+        <button type="submit" class="btn save-btn" id="saveBtn">Save</button>
+      </div>
+    </form>
+  </div>
+  
+
+  <script src="js/warden-profile.js"></script>
+</body>
+</html>

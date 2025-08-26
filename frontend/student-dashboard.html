@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <h1>Greetings</h1>
+
+    <section class="card profile">
+      <h2>👤 Profile</h2>
+      <p><strong>Name:</strong> Student One</p>
+      <p><strong>Email:</strong> student1@college.edu</p>
+      <p><strong>Room:</strong> B2-12</p>
+      <p><strong>Block:</strong> B</p>
+      <p><strong>Phone Number:</strong> 1234567890</p>
+    </section>
+    <section class="card complaint">
+  <h2>🛠 Complaints</h2>
+
+  <form id="complaintForm">
+    <select id="category" required>
+      <option value="">-- Select Category --</option>
+      <option value="Water">Water</option>
+      <option value="Electricity">Electricity</option>
+      <option value="Food">Food</option>
+      <option value="WiFi">WiFi</option>
+      <option value="Cleanliness">Cleanliness</option>
+    </select><br>
+
+    <textarea placeholder="Describe the issue..." required></textarea><br>
+    <button type="submit">Submit Complaint</button>
+  </form>
+
+  <ul id="complaintList"></ul>
+</section>
+
+
+
+
+
+    <section class="card outing">
+      <h2>Outing Stats</h2>
+      <p><strong>Total Outings:</strong> 5</p>
+      <p><strongLast Outing:</strong> 10 July 2025 (4 hrs)</p>
+    </section>
+    <section class="card outing">
+  <h2>📝 Outing Request</h2>
+  <form id="outingForm">
+    <input type="date" id="outDate" required />
+    <input type="date" id="returnDate" required />
+    <textarea id="reason" placeholder="Reason for outing" required></textarea><br>
+    <button type="submit">Submit Outing</button>
+  </form>
+
+  <ul id="outingList"></ul>
+</section>
+
+
+    <section class="card laundry">
+      <h2>Laundry Usage</h2>
+      <p><strong>Total Washes:</strong> 8</p>
+      <p><strongLast Machine Used:</strong> Washer 2</p>
+    </section>
+
+    <section class="card emergency">
+      <h2>🚨 Emergency</h2>
+      <button class="sos">Send SOS Alert</button>
+    </section>
+  </div>
+  <div id="returnSection" style="display:none;">
+  <button id="returnBtn" class="return-btn">📍 I Am Back</button>
+</div>
+
+  <script src="js/student-dashboard.js"></script>
+  <button id="logoutBtn">🚪 Logout</button>
+
+</body>
+</html>

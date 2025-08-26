@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Outing Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/overview.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f9fcff;
+    }
+    .dashboard {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+    }
+    .sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .sidebar nav a {
+      display: block;
+      padding: 10px;
+      margin: 10px 0;
+      color: #ccc;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .sidebar nav a.active,
+    .sidebar nav a:hover {
+      background: #1abc9c;
+      color: white;
+    }
+    .main-content {
+      flex-grow: 1;
+      padding: 40px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    .form-section, .history-section, .stats-section {
+      background: white;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .form-section label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+    .form-section input, .form-section textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+    }
+    .form-section button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: black;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #imBackBtn {
+      display: none;
+      background: #28a745;
+      color: black;
+      font-weight: bold;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #f0f0f0;
+    }
+    .stats-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .stat-box {
+      background: #e3f2fd;
+      padding: 20px;
+      border-radius: 8px;
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body style="color: black;">
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2>🏠 Hostel</h2>
+      <nav>
+        <a href="overview.html">Overview</a>
+        <a href="complaint.html">Complaints</a>
+        <a href="outing.html" class="active">Outing</a>
+        <a href="laundry.html">Laundry</a>
+        <a href="emergency.html">Emergency</a>
+        <a href="profile.html">Profile</a>
+        <a href="index.html" onclick="logout()">Logout</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <h1>Outing Management</h1>
+
+      <!-- Outing Form -->
+      <div class="form-section">
+        <h2>Register New Outing</h2>
+        <form id="outingForm">
+          <label>Destination</label>
+          <input type="text" id="destination" required>
+
+          <label>Purpose</label>
+          <textarea id="purpose" required></textarea>
+
+          <label>Expected Return (hours)</label>
+          <input type="number" id="duration" required min="0.5" step="0.5">
+
+          <button type="submit">Submit</button>
+        </form>
+        <button id="imBackBtn">I'm Back</button>
+      </div>
+
+      <!-- History Section -->
+      <div class="history-section">
+        <h2>Your Outing History</h2>
+        <table id="outingHistory">
+          <thead>
+            <tr>
+              <th>Destination</th>
+              <th>Purpose</th>
+              <th>Out Time</th>
+              <th>Returned</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Real-time outing data will load here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Statistics -->
+      <div class="stats-section">
+        <h2>Your Outing Statistics</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <h3 id="totalOutings">0</h3>
+            <p>Total Outings</p>
+          </div>
+          <div class="stat-box">
+            <h3 id="avgDuration">0h</h3>
+            <p>Average Duration</p>
+          </div>
+          <div class="stat-box">
+            <h3 id="commonPurpose">-</h3>
+            <p>Most Common Purpose</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/outing.js"></script>
+</body>
+</html>

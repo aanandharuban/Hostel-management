@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Student Registration</h2>
+
+    <form id="registerForm">
+      <input type="email" placeholder="College Email" id="email" required />
+      <input type="text" placeholder="Full Name" id="name" required />
+      <select id="department" name="department" required>
+  <option value="">Select Department</option>
+  <option value="CSE">CSE</option>
+  <option value="CSE">Cyber security</option>
+  <option value="CSE">AIDS</option>
+  <option value="CSE">AIML</option>
+  <option value="ECE">ECE</option>
+  <option value="EEE">EEE</option>
+  <option value="MECH">MECH</option>
+  <option value="CIVIL">CIVIL</option>
+</select>
+
+      <label for="year"></label>
+<select id="year" name="year" required>
+  <option value="">Select Year of studying</option>
+  <option value="1">1st Year</option>
+  <option value="2">2nd Year</option>
+  <option value="3">3rd Year</option>
+  <option value="4">4th Year</option>
+</select>
+
+      <input type="text" placeholder="Room No (e.g., B2-12)" id="room" required />
+      <input type="text" placeholder="Block (e.g., B)" id="block" required />
+      <label for="phone"></label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required pattern="[0-9]{10}">
+
+
+      <input type="password" placeholder="DOB as Password (e.g., 01012000)" id="password" required />
+      <button type="submit">Register</button>
+      <a href="index.html">Back to Login</a>
+    </form>
+  </div>
+
+  <script src="js/register.js"></script>
+</body>
+</html>

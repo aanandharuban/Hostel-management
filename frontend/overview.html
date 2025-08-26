@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Overview | Hostel Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/overview.css" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(to right, #f3f5ff, #eaf6ff);
+      color: #333;
+    }
+    .dashboard {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+    }
+    .sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .sidebar nav a {
+      display: block;
+      padding: 10px;
+      margin: 10px 0;
+      color: #ccc;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .sidebar nav a.active,
+    .sidebar nav a:hover {
+      background: #1abc9c;
+      color: white;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .greeting-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .action-card {
+      padding: 18px;
+      border-radius: 10px;
+      background: #ffffff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      text-align: left;
+      font-weight: 500;
+    }
+    .action-card:hover {
+      transform: translateY(-5px);
+    }
+    .light-blue { background: #e3f2fd; }
+    .light-pink { background: #fce4ec; }
+    .light-red  { background: #ffebee; }
+    .light-green{ background: #e8f5e9; }
+    .light-yellow{ background: #fffde7; }
+
+    .status-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .status-card {
+      padding: 16px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .status-card h4 {
+      margin-bottom: 5px;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2>🏠 Hostel</h2>
+      <nav>
+        <a href="overview.html" class="active">Overview</a>
+        <a href="complaint.html">Complaints</a>
+        <a href="outing.html">Outing</a>
+        <a href="laundry.html">Laundry</a>
+        <a href="emergency.html">Emergency</a>
+        <a href="profile.html">Profile</a>
+        <a href="student-announcement.html">📢 Announcements</a>
+        <a href="index.html" onclick="logout()">Logout</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section class="greeting-card">
+        <h3 id="greeting">👋 Welcome!</h3>
+        <p id="roomInfo">Room: -</p>
+      </section>
+
+      <section>
+        <h2>Quick Actions</h2>
+        <div class="quick-actions">
+          <a href="profile.html" class="action-card light-blue">👤 Profile</a>
+          <a href="complaint.html" class="action-card light-pink">📩 Complaints</a>
+          <a href="emergency.html" class="action-card light-red">🚨 Emergency</a>
+          <a href="outing.html" class="action-card light-green">🚶 Outings</a>
+          <a href="laundry.html" class="action-card light-yellow">🧺 Laundry</a>
+          <a href="student-announcement.html" class="action-card light-blue">📢 Announcements</a>
+          </a>
+
+        </div>
+      </section>
+
+      <section>
+        <h2>Status Overview</h2>
+        <div class="status-overview">
+          <div class="status-card">
+            <h4>Room Status</h4>
+            <p id="roomStatus">Loading...</p>
+            <small id="roomLabel">-</small>
+          </div>
+          <div class="status-card">
+            <h4>Pending Complaints</h4>
+            <p id="complaintCount">0</p>
+            <small id="complaintUpdate">-</small>
+          </div>
+          <div class="status-card">
+            <h4>Outings This Month</h4>
+            <p id="outingCount">0</p>
+            <small id="outingHours">-</small>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const token = localStorage.getItem("token");
+    async function loadOverview() {
+      const res = await fetch("http://localhost:5000/api/student/profile", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if (data.success) {
+        const student = data.student;
+        document.getElementById("greeting").textContent = `👋 Welcome, ${student.name}!`;
+        document.getElementById("roomInfo").textContent = `Room: ${student.room}, Block ${student.block}`;
+        document.getElementById("roomStatus").textContent = "Active";
+        document.getElementById("roomLabel").textContent = `Room ${student.room}`;
+      }
+    }
+
+    async function loadComplaints() {
+      const res = await fetch("http://localhost:5000/api/complaints", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById("complaintCount").textContent = data.complaints.length;
+        document.getElementById("complaintUpdate").textContent = "Last updated just now";
+      }
+    }
+
+    async function loadOutings() {
+      const res = await fetch("http://localhost:5000/api/outing", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById("outingCount").textContent = data.outings.length;
+        document.getElementById("outingHours").textContent = "7 hours total"; // You can calculate based on data if needed
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("token");
+    }
+
+    loadOverview();
+    loadComplaints();
+    loadOutings();
+  </script>
+</body>
+</html>

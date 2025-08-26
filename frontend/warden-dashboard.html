@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Warden Dashboard</title>
+  <link rel="stylesheet" href="css/warden-dashboard.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>🏢 Hostel Management System</h1>
+  </header>
+  <span id="outing-alert" style="color: red; font-weight: bold;"></span>
+  <!-- LEFT PANEL START -->
+<nav class="sidebar">
+  <ul>
+    <li><a href="warden-dashboard.html">🏠 Dashboard</a></li>
+    <li><a href="warden-profile.html">👤 Profile</a></li>
+    <li><a href="warden-students.html">📘 Student Records</a></li>
+    <li><a href="room-allocation.html">🛏️ Room Allocation</a></li>
+    <li><a href="warden-complaints.html">📨 Complaints</a></li>
+    <li><a href="warden-outing.html">✅ Outing Approvals</a></li>
+    <li><a href="warden-announcements.html">📢 Announcements</a></li>
+    <li><a href="index.html" style="color: red;">🚪 Logout</a></li>
+  </ul>
+</nav>
+<!-- LEFT PANEL END -->
+
+
+
+  <main class="main-container">
+    <section class="welcome-card">
+      <h2 id="welcomeText">Welcome, Warden!</h2>
+      <p id="wardenRole">Role: Hostel Warden</p>
+    </section>
+
+    <section class="quick-actions">
+      <h3>Quick Actions</h3>
+      <div class="action-grid">
+        <a href="warden-profile.html" class="action-card blue">
+          <span>👤</span>
+          <h4>Profile</h4>
+          <p>View and update your personal information</p>
+        </a>
+        <a href="warden-complaints.html" class="action-card purple">
+          <span>📨</span>
+          <h4>Complaints</h4>
+          <p>Submit and track your complaints</p>
+        </a>
+        
+        <a href="warden-students.html" class="action-card violet">
+          <span>👥</span>
+          <h4>Student Records</h4>
+          <p>View all student records</p>
+        </a>
+        <a href="warden-outing.html" class="action-card orange">
+          <span>✅</span>
+          <h4>Pending Approvals</h4>
+          <p>Approve student requests</p>
+        </a>
+      </div>
+    </section>
+    <section class="announcement-section">
+  <h3>📢 Post Announcement</h3>
+  <form id="announcementForm" style="display: flex; flex-direction: column; gap: 10px; max-width: 500px;">
+    <input type="text" id="heading" placeholder="Announcement Heading" required style="padding: 10px; border-radius: 6px; border: 1px solid #ccc;" />
+    <textarea id="message" placeholder="Type your message here..." required rows="4" style="padding: 10px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
+    <button type="submit" style="padding: 10px; border: none; border-radius: 6px; background-color: #3b82f6; color: white; font-weight: bold; cursor: pointer;">
+      📤 Post Announcement
+    </button>
+  </form>
+</section>
+
+  </main>
+
+  <script>
+    const wardenName = localStorage.getItem("wardenName") || "Warden";
+    document.getElementById("welcomeText").textContent = `Welcome, ${wardenName}!`;
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Warden Emergency Panel</title>
+  <link rel="stylesheet" href="css/overview.css" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+    h2 {
+      font-size: 26px;
+      color: #00796b;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 14px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #e0f2f1;
+      color: #004d40;
+    }
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    .status-tag {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      display: inline-block;
+      background: #ffcdd2;
+      color: #c62828;
+    }
+    .timestamp {
+      color: #888;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🆘 Emergency Alerts (Live)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Student Name</th>
+          <th>Email</th>
+          <th>Room</th>
+          <th>Emergency Type</th>
+          <th>Description</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody id="emergencyTableBody">
+        <!-- Dynamic rows -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="js/warden-emergency.js"></script>
+</body>
+</html>
