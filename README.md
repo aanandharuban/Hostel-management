@@ -40,4 +40,4 @@ A complete **Hostel Management System** that simplifies student and warden opera
 
 ---
 
-As a Hostel student -- A Best application for Hostel buddys to make technology penetrate everywhere and make our life simple have a user friendly and advance idea support to both developer growth and user growth without any negativity.
+As a Hostel student -- A Best application for Hostel buddyies to make technology penetrate everywhere and make our life simple have a user friendly and advance idea support to both developer growth and user growth without any negativity.
